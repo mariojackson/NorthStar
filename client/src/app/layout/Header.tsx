@@ -2,7 +2,7 @@ import { AppBar, Toolbar, Typography } from '@mui/material';
 
 export default function Header() {
   return (
-    <AppBar elevation={0}>
+    <AppBar position='static' sx={{ mb: 4 }} elevation={0}>
       <Toolbar>
         <Typography variant='h6'>
           NorthStar 
