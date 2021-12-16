@@ -17,7 +17,7 @@ export default function ProductCard({ product }: Props) {
     <Card>
         
       <CardMedia
-        sx={{ height: 140, backgroundSize: 'contain' }}
+        sx={{ height: 140, backgroundSize: 'contain', marginTop: '24px' }}
         image={product.pictureUrl}
         title={product.name}
       />
@@ -35,6 +35,7 @@ export default function ProductCard({ product }: Props) {
           {product.brand} / {product.type}
         </Typography>
       </CardContent>
+        
       <CardActions>
         <Button size="small">Add to cart</Button>
         <Button size="small">View</Button>

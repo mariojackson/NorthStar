@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { Product } from '../models/product';
 import Catalog from '../../features/catalog/Catalog';
 import Header from './Header';
-import { Container, CssBaseline } from '@mui/material';
+import { Box, Container, CssBaseline } from '@mui/material';
+import { grey } from '@mui/material/colors';
 
 function App() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -21,9 +22,11 @@ function App() {
     <>
       <CssBaseline />
       <Header />
-      <Container>
-        <Catalog products={products} addProduct={addProduct} />
-      </Container>
+      <Box sx={{ backgroundColor: grey[50] }}>
+        <Container>
+          <Catalog products={products} addProduct={addProduct} />
+          </Container>
+      </Box>
     </>
   );
 }
