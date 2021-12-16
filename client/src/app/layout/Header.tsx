@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { ShoppingCart } from '@mui/icons-material';
-import { AppBar, Badge, IconButton, List, ListItem, Toolbar, Typography } from '@mui/material';
+import { AppBar, Badge, Box, IconButton, List, ListItem, Toolbar, Typography } from '@mui/material';
 
 import DarkModeSwitch from '../../features/DarkModeSwitch';
 
@@ -20,17 +20,32 @@ const rightAlignedLinks = [
   { title: 'register', path: '/register' }
 ];
 
+const navLinkStyle = {
+  color: 'primary.dark',
+  textDecoration: 'none',
+  typography: 'p',
+  '&:hover': {
+    color: 'white'
+  },
+  '&.active': {
+    color: 'white'
+  }
+}
+
 export default function Header({ darkMode, handleDarkModeSwitch }: Props) {
   return (
     <AppBar position='static' sx={{ mb: 12, color: 'white' }} elevation={0}>
-      <Toolbar>
-        <Typography 
-          variant='h6' 
-          style={{ flex: 1 }} 
-          component={NavLink} to='/' 
-          sx={{ textDecoration: 'none', color: 'white' }}>
-          NorthStar
-        </Typography>
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        
+        <Box>
+          <Typography
+            variant='h6'
+            component={NavLink} to='/'
+            exact={true}
+            sx={{ textDecoration: 'none', color: 'white' }}>
+            NorthStar
+          </Typography>
+        </Box>
 
         <List sx={{ display: 'flex' }}>
           {centeredLinks.map(({ title, path }) => (
@@ -38,33 +53,35 @@ export default function Header({ darkMode, handleDarkModeSwitch }: Props) {
               component={NavLink}
               to={path}
               key={path}
-              sx={{color: 'inherit', typography: 'p'}}
+              sx={navLinkStyle}
             >
               {title.toUpperCase()}
             </ListItem>
           ))}
         </List>
         
-        <IconButton size='large'>
-          <Badge badgeContent={4} color='secondary'>
-            <ShoppingCart /> 
-          </Badge>
-        </IconButton>
-        
-        <List sx={{ display: 'flex' }}>
-          {rightAlignedLinks.map(({ title, path }) => (
-            <ListItem
-              component={NavLink}
-              to={path}
-              key={path}
-              sx={{color: 'inherit', typography: 'p'}}
-            >
-              {title.toUpperCase()}
-            </ListItem>
-          ))}
-        </List>
-        
-        <DarkModeSwitch checked={darkMode} onChange={handleDarkModeSwitch} />
+        <Box display='flex' alignItems='center'>
+          <DarkModeSwitch checked={darkMode} onChange={handleDarkModeSwitch} />
+          
+          <IconButton size='large'>
+            <Badge badgeContent={4} color='secondary'>
+              <ShoppingCart />
+            </Badge>
+          </IconButton>
+
+          <List sx={{ display: 'flex' }}>
+            {rightAlignedLinks.map(({ title, path }) => (
+              <ListItem
+                component={NavLink}
+                to={path}
+                key={path}
+                sx={navLinkStyle}
+              >
+                {title.toUpperCase()}
+              </ListItem>
+            ))}
+          </List>
+        </Box>
 
       </Toolbar>
     </AppBar>
