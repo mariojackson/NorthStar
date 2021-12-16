@@ -30,7 +30,7 @@ export default function ProductCard({ product }: Props) {
       />
       
       <CardContent>
-        <Typography gutterBottom color='secondary'>
+        <Typography gutterBottom color='secondary' variant='body2'>
           ${(product.price / 100).toFixed(2)}
         </Typography>
         

@@ -16,8 +16,14 @@ const theme = createTheme({
       main: '#3d5afe',
     },
   },
-  shape: {
-    borderRadius: 20
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 20
+        }
+      }
+    }
   }
 });
 
