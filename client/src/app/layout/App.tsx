@@ -19,7 +19,10 @@ function App() {
     palette: {
       mode: paletteType,
       background: {
-        default: paletteType === 'light' ? grey[50]: '#333',
+        default: paletteType === 'light' ? grey[50] : '#333',
+      },
+      text: {
+        primary: paletteType === 'light' ? grey[800] : grey[300]
       },
       primary: {
         main: indigo[400],
