@@ -18,7 +18,7 @@ export default function ProductCard({ product }: Props) {
         
       <CardHeader 
         sx={{ backgroundColor: 'primary.main', color: 'white' }}
-        titleTypographyProps={{ variant: 'body2', fontWeight: 'bold' }}
+        titleTypographyProps={{ variant: 'body2' }}
         title={product.name} />
       
       <CardMedia
