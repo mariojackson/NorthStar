@@ -9,7 +9,7 @@ export default function ServerError() {
     <Container component={Paper}>
       {state?.error ? (
         <>
-          <Typography variant='h5' gutterBottom sx={{ py: 2 }}>
+          <Typography variant='h5' gutterBottom sx={{ pt: 2, fontWeight: 'bold' }}>
             {state.error.title}  
           </Typography>
           
