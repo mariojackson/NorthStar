@@ -11,6 +11,7 @@ import HomePage from '../../features/home/HomePage';
 import ProductDetails from '../../features/catalog/ProductDetails';
 import AboutPage from '../../features/about/contact/AboutPage';
 import ContactPage from '../../features/about/contact/ContactPage';
+import ServerError from '../errors/ServerError';
 
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
         <Route path='/catalog/:id' component={ProductDetails} />
         <Route path='/about' component={AboutPage} />
         <Route path='/contact' component={ContactPage} />
+        <Route path='/server-error' component={ServerError} />
       </Container>
     </ThemeProvider>
   );
