@@ -15,14 +15,7 @@ interface Props {
 export default function ProductCard({ product }: Props) {
   return (
     <Card>
-      
-      <CardHeader 
-        title={product.name}
-        titleTypographyProps={{
-          sx: { color: 'secondary.main' }, variant: 'body1'
-        }}
-      />
-      
+        
       <CardMedia
         sx={{ height: 140, backgroundSize: 'contain' }}
         image={product.pictureUrl}
@@ -30,6 +23,10 @@ export default function ProductCard({ product }: Props) {
       />
       
       <CardContent>
+        <Typography gutterBottom color='text.primary' variant='body2' fontWeight='bold'>
+          {product.name}
+        </Typography>
+          
         <Typography gutterBottom color='secondary' variant='body2'>
           ${(product.price / 100).toFixed(2)}
         </Typography>
