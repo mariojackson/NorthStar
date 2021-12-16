@@ -1,12 +1,11 @@
 import { Product } from '../../app/models/product';
 import {
-  Avatar,
   Button, Card,
   CardActions,
-  CardContent, CardHeader,
-  CardMedia,
+  CardContent, CardHeader, CardMedia,
   Typography
 } from '@mui/material';
+import { grey} from '@mui/material/colors';
 
 interface Props {
   product: Product;
@@ -16,18 +15,19 @@ export default function ProductCard({ product }: Props) {
   return (
     <Card>
         
+      <CardHeader 
+        sx={{ backgroundColor: 'primary.main', color: 'white' }}
+        titleTypographyProps={{ variant: 'body2', fontWeight: 'bold' }}
+        title={product.name} />
+      
       <CardMedia
-        sx={{ height: 140, backgroundSize: 'contain', marginTop: '24px' }}
+        sx={{ height: 200, backgroundSize: 'contain', backgroundColor: grey[200] }}
         image={product.pictureUrl}
         title={product.name}
       />
       
       <CardContent>
-        <Typography gutterBottom color='text.primary' variant='body2' fontWeight='bold'>
-          {product.name}
-        </Typography>
-          
-        <Typography gutterBottom color='secondary' variant='body2'>
+        <Typography gutterBottom variant='body2' fontWeight='bold'>
           ${(product.price / 100).toFixed(2)}
         </Typography>
         

@@ -1,33 +1,53 @@
-import { useEffect, useState } from 'react';
-import { Product } from '../models/product';
+import { Container, createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import { grey, indigo} from '@mui/material/colors';
+
 import Catalog from '../../features/catalog/Catalog';
 import Header from './Header';
-import { Box, Container, CssBaseline } from '@mui/material';
-import { grey } from '@mui/material/colors';
+import { useState } from 'react';
+
 
 function App() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [darkMode, setDarkMode] = useState(false);
+  const paletteType = darkMode ? 'dark' : 'light';
   
-  useEffect(() => {
-    fetch('http://localhost:5000/api/products')
-      .then(response => response.json())
-      .then(data => setProducts(data));
-  }, []);
+  const theme = createTheme({
+    palette: {
+      mode: paletteType,
+      background: {
+        default: paletteType === 'light' ? grey[50]: '#333',
+      },
+      primary: {
+        main: indigo[400],
+      },
+      secondary: {
+        main: '#3d5afe',
+      },
+    },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: 20
+          }
+        }
+      }
+    }
+  });
   
-  function addProduct() {
-    // TODO 
+  function handleDarkModeSwitch() {
+    setDarkMode(!darkMode);
   }
-
+  
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header />
-      <Box sx={{ backgroundColor: grey[50] }}>
-        <Container>
-          <Catalog products={products} addProduct={addProduct} />
-          </Container>
-      </Box>
-    </>
+      
+      <Header darkMode={darkMode} handleDarkModeSwitch={handleDarkModeSwitch} />
+      
+      <Container>
+        <Catalog />
+      </Container>
+    </ThemeProvider>
   );
 }
 
