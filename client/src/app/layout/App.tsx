@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Route } from 'react-router-dom';
 import { Container, createTheme, CssBaseline, ThemeProvider } from '@mui/material';
-import { grey, indigo} from '@mui/material/colors';
+import { grey, indigo, lightGreen, pink } from '@mui/material/colors';
 
 import Header from './Header';
 import Catalog from '../../features/catalog/Catalog';
