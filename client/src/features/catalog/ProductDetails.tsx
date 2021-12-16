@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Divider, Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material';
+import { Grid, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
