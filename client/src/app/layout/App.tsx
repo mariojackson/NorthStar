@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Container, createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { grey, indigo } from '@mui/material/colors';
@@ -12,6 +12,7 @@ import ProductDetails from '../../features/catalog/ProductDetails';
 import AboutPage from '../../features/about/contact/AboutPage';
 import ContactPage from '../../features/about/contact/ContactPage';
 import ServerError from '../errors/ServerError';
+import NotFound from '../errors/NotFound';
 
 
 function App() {
@@ -58,12 +59,15 @@ function App() {
       <Header darkMode={darkMode} handleDarkModeSwitch={handleDarkModeSwitch} />
       
       <Container>
-        <Route path='/' component={HomePage} exact={true} />
-        <Route path='/catalog' component={Catalog} exact={true} />
-        <Route path='/catalog/:id' component={ProductDetails} />
-        <Route path='/about' component={AboutPage} />
-        <Route path='/contact' component={ContactPage} />
-        <Route path='/server-error' component={ServerError} />
+        <Switch>
+          <Route path='/' component={HomePage} exact={true} />
+          <Route path='/catalog' component={Catalog} exact={true} />
+          <Route path='/catalog/:id' component={ProductDetails} />
+          <Route path='/about' component={AboutPage} />
+          <Route path='/contact' component={ContactPage} />
+          <Route path='/server-error' component={ServerError} />
+          <Route component={NotFound} />
+        </Switch>
       </Container>
     </ThemeProvider>
   );
