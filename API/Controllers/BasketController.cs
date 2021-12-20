@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
+using API.DTOs;
 using API.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ public class BasketController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<Basket>> GetBasket()
+    public async Task<ActionResult<BasketDto>> GetBasket()
     {
         var basket = await RetrieveBasket();
 
@@ -28,18 +29,27 @@ public class BasketController : BaseApiController
             return NotFound();
         }
 
-        return basket;
+        return new BasketDto
+        {
+            Id = basket.Id,
+            BuyerId = basket.BuyerId,
+            Items = basket.Items.Select(item => new BasketItemDto
+            {
+                ProductId = item.ProductId,
+                Name = item.Product.Name,
+                Price = item.Product.Price,
+                PictureUrl = item.Product.Type,
+                Type = item.Product.Type,
+                Brand = item.Product.Brand,
+                Quantity = item.Quantity
+            }).ToList()
+        };
     }
 
     [HttpPost]
     public async Task<ActionResult> AddItemToBasket(int productId, int quantity)
     {
-        var basket = await RetrieveBasket();
-
-        if (basket == null)
-        {
-            basket = CreateBasket();
-        }
+        var basket = await RetrieveBasket() ?? CreateBasket();
 
         var product = await _context.Products.FindAsync(productId);
 
@@ -63,10 +73,22 @@ public class BasketController : BaseApiController
     [HttpDelete]
     public async Task<ActionResult> RemoveBasketItem(int productId, int quantity)
     {
-        // TODO
-        // Get basket
-        // Remove item or reduce quantity
-        // Save changes
+        var basket = await RetrieveBasket();
+
+        if (basket == null)
+        {
+            return NotFound();
+        }
+        
+        basket.RemoveItem(productId, quantity);
+
+        var result = await _context.SaveChangesAsync() > 0;
+        
+        if (!result)
+        {
+            return BadRequest(new ProblemDetails{Title = "Could not remove item from basket"});
+        }
+            
         return Ok();
     }
     
